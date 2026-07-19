@@ -1,72 +1,342 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { GlassCard } from '../components/ui/GlassCard';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Leaf,
+  FileText,
+  Sparkles,
+  Trophy,
+  MapPin,
+  Brain,
+  BookOpen,
+  Clock,
+  CloudSun,
+} from "lucide-react";
 
-const ERAS = [
-  { year: '1990', title: 'The Foundations', desc: 'The campus opens its doors with three buildings and a singular vision.', color: 'bg-stone-300' },
-  { year: '2005', title: 'The Expansion', desc: 'The Science Wing is unveiled, drastically increasing research capacity.', color: 'bg-amber-200' },
-  { year: '2015', title: 'The Digital Era', desc: 'Full campus connectivity and our first dedicated robotics lab.', color: 'bg-blue-200' },
-  { year: '2026', title: 'The Present', desc: 'A thriving hub of innovation and diverse student culture.', color: 'bg-emerald-200' },
-  { year: '2035', title: 'The Vision', desc: 'Plans for a fully zero-emission, carbon-neutral expansion.', color: 'bg-indigo-300' },
+const SEMESTERS = [
+  {
+    id: "Orientation",
+    color: "emerald",
+    bg: "bg-gradient-to-br from-emerald-50 to-green-100",
+    icon: Leaf,
+    weather: "☀ Pleasant Weather",
+    progress: 20,
+    stats: "6 / 18 Buildings",
+    achievement: "Explorer",
+    widgets: [
+      "Registration",
+      "ID Card",
+      "Meet Mentor",
+      "Freshers Meetup",
+    ],
+    map: ["Admin Block", "Library", "Registration Desk"],
+    ai:
+      "👋 Welcome! Visit the library today and unlock 50 XP. Your mentor is waiting near the Admin Block.",
+  },
+  {
+    id: "Mid Semester",
+    color: "amber",
+    bg: "bg-gradient-to-br from-amber-50 to-orange-100",
+    icon: FileText,
+    weather: "🌤 Warm Afternoon",
+    progress: 60,
+    stats: "5 Assignments",
+    achievement: "Scholar",
+    widgets: [
+      "Today's Classes",
+      "Assignments",
+      "Attendance",
+      "Study Rooms",
+    ],
+    map: ["Labs", "Classrooms", "Study Room"],
+    ai:
+      "📚 You have a 90-minute gap after DBMS. Room RV-204 is free for studying.",
+  },
+  {
+    id: "Exam Week",
+    color: "indigo",
+    bg: "bg-gradient-to-br from-slate-900 via-slate-950 to-black text-white",
+    icon: Sparkles,
+    weather: "🌧 Rain Expected",
+    progress: 95,
+    stats: "18 Study Hours",
+    achievement: "Survivor",
+    widgets: [
+      "Exam Countdown",
+      "Revision Planner",
+      "Library Seats",
+      "Exam Hall",
+    ],
+    map: ["Library", "Quiet Zone", "Exam Hall"],
+    ai:
+      "🧠 Library occupancy is only 22%. This is the perfect time to revise Operating Systems.",
+  },
 ];
 
-export const TimeMachine = () => {
-  const [activeEra, setActiveEra] = useState(ERAS[3]);
+export default function TimeMachine() {
+  const [index, setIndex] = useState(0);
+
+  const current = SEMESTERS[index];
+  const Icon = current.icon;
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="min-h-screen pt-28 pb-12 px-6 flex flex-col items-center"
+    <div
+      className={`min-h-screen transition-all duration-700 ${current.bg} px-8 py-10`}
     >
-      <header className="text-center space-y-4 mb-12">
-        <h1 className="text-5xl font-bold text-[#0F172A]">Campus Time Machine</h1>
-        <p className="text-lg text-[#0F172A]/60">Navigate the history and future of our home.</p>
-      </header>
+      {/* Header */}
 
-      {/* Timeline Controls */}
-      <nav aria-label="Campus Timeline" className="flex gap-2 mb-12 overflow-x-auto pb-2 w-full justify-start md:justify-center">
-        {ERAS.map((era) => (
-          <button
-            key={era.year}
-            onClick={() => setActiveEra(era)}
-            aria-pressed={activeEra.year === era.year}
-            className={`px-6 py-2 rounded-full font-bold whitespace-nowrap transition-all ${
-              activeEra.year === era.year 
-                ? 'bg-[#0F172A] text-white shadow-lg' 
-                : 'bg-white border border-[#0F172A]/10 hover:border-[#064E3B]/30'
+      <motion.div
+        layout
+        className="text-center mb-12"
+      >
+        <h1 className="text-5xl font-bold">⏳ Campus Time Machine</h1>
+
+        <p className="opacity-70 mt-2">
+          Watch your campus evolve throughout the semester
+        </p>
+      </motion.div>
+
+      {/* Timeline */}
+
+      <div className="max-w-3xl mx-auto mb-14 relative">
+
+        <div className="absolute left-0 right-0 top-5 h-1 bg-gray-300 rounded-full"/>
+
+        <motion.div
+          className="absolute top-5 h-1 bg-emerald-500 rounded-full"
+          animate={{
+            width: `${index * 50}%`,
+          }}
+        />
+
+        <div className="flex justify-between relative">
+
+          {SEMESTERS.map((s, i) => {
+
+            const StageIcon = s.icon;
+
+            return (
+
+              <button
+                key={s.id}
+                onClick={() => setIndex(i)}
+                className="flex flex-col items-center"
+              >
+
+                <motion.div
+                  whileTap={{ scale: 0.9 }}
+                  animate={{
+                    scale: index === i ? 1.2 : 1,
+                  }}
+                  className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${
+                    index === i
+                      ? "bg-black text-white"
+                      : "bg-white"
+                  }`}
+                >
+                  <StageIcon size={22} />
+                </motion.div>
+
+                <span className="mt-3 text-xs font-bold">
+                  {s.id}
+                </span>
+
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Dashboard */}
+
+      <div className="grid lg:grid-cols-3 gap-7">
+
+        {/* LEFT */}
+
+        <AnimatePresence mode="wait">
+
+          <motion.div
+            key={current.id}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0 }}
+            className="lg:col-span-2"
+          >
+
+            <div className="grid md:grid-cols-2 gap-5">
+
+              {current.widgets.map((widget) => (
+
+                <motion.div
+                  key={widget}
+                  whileHover={{ y: -5 }}
+                  className={`rounded-3xl p-6 shadow-lg ${
+                    index === 2
+                      ? "bg-slate-800"
+                      : "bg-white"
+                  }`}
+                >
+
+                  <Icon className="mb-4"/>
+
+                  <h3 className="font-bold text-lg">
+                    {widget}
+                  </h3>
+
+                  <p className="opacity-60 mt-2 text-sm">
+                    Dynamic content based on semester stage.
+                  </p>
+
+                </motion.div>
+
+              ))}
+
+            </div>
+
+          </motion.div>
+
+        </AnimatePresence>
+
+        {/* RIGHT */}
+
+        <div className="space-y-5">
+
+          {/* AI */}
+
+          <motion.div
+            layout
+            className={`rounded-3xl p-6 shadow-lg ${
+              index === 2
+                ? "bg-slate-800"
+                : "bg-white"
             }`}
           >
-            {era.year}
-          </button>
-        ))}
-      </nav>
 
-      {/* Dynamic Content Display */}
-      <main className="w-full max-w-2xl" aria-live="polite">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeEra.year}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            <GlassCard className="p-10 md:p-12 text-center space-y-6">
-              <div className={`w-20 h-20 mx-auto rounded-full ${activeEra.color} opacity-40 shadow-inner`} />
-              <h2 className="text-3xl font-bold text-[#0F172A]">{activeEra.title}</h2>
-              <p className="text-lg text-[#0F172A]/70 leading-relaxed">{activeEra.desc}</p>
-              
-              <div className="pt-8 border-t border-[#0F172A]/5">
-                <p className="text-xs font-bold uppercase tracking-widest text-[#064E3B]">Alumni Reflection</p>
-                <blockquote className="italic text-[#0F172A]/60 mt-3">
-                  "That was the year everything changed for us."
-                </blockquote>
-              </div>
-            </GlassCard>
+            <div className="flex items-center gap-2 mb-3">
+
+              <Brain />
+
+              <h2 className="font-bold">
+                Senior AI
+              </h2>
+
+            </div>
+
+            <p className="opacity-80 text-sm">
+              {current.ai}
+            </p>
+
+            <button className="mt-5 w-full rounded-xl bg-indigo-600 text-white py-2">
+              Navigate
+            </button>
+
           </motion.div>
-        </AnimatePresence>
-      </main>
-    </motion.div>
+
+          {/* Mini Map */}
+
+          <div
+            className={`rounded-3xl p-6 shadow-lg ${
+              index === 2
+                ? "bg-slate-800"
+                : "bg-white"
+            }`}
+          >
+
+            <h2 className="font-bold mb-4 flex items-center gap-2">
+              <MapPin size={18} />
+              Campus Highlights
+            </h2>
+
+            {current.map.map((place) => (
+              <p
+                key={place}
+                className="flex gap-2 mb-2 opacity-80"
+              >
+                📍 {place}
+              </p>
+            ))}
+
+          </div>
+
+          {/* Progress */}
+
+          <div
+            className={`rounded-3xl p-6 shadow-lg ${
+              index === 2
+                ? "bg-slate-800"
+                : "bg-white"
+            }`}
+          >
+
+            <h2 className="font-bold mb-4">
+              Semester Progress
+            </h2>
+
+            <div className="w-full bg-gray-200 rounded-full h-4">
+
+              <motion.div
+                animate={{
+                  width: `${current.progress}%`,
+                }}
+                className="bg-indigo-500 h-4 rounded-full"
+              />
+
+            </div>
+
+            <p className="mt-3 text-sm">
+              {current.progress}% Complete
+            </p>
+
+          </div>
+
+          {/* Weather */}
+
+          <div
+            className={`rounded-3xl p-6 shadow-lg ${
+              index === 2
+                ? "bg-slate-800"
+                : "bg-white"
+            }`}
+          >
+
+            <div className="flex items-center gap-2">
+
+              <CloudSun />
+
+              <span>{current.weather}</span>
+
+            </div>
+
+          </div>
+
+          {/* Achievement */}
+
+          <div
+            className={`rounded-3xl p-6 shadow-lg flex justify-between items-center ${
+              index === 2
+                ? "bg-slate-800"
+                : "bg-white"
+            }`}
+          >
+
+            <div>
+
+              <p className="text-sm opacity-60">
+                Achievement
+              </p>
+
+              <h3 className="font-bold">
+                🏆 {current.achievement}
+              </h3>
+
+            </div>
+
+            <Trophy className="text-yellow-500"/>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
   );
-};
+}

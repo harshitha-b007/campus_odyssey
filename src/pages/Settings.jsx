@@ -4,12 +4,15 @@ import { User, Bell, Shield, Moon, Accessibility, Sparkles, Languages, RotateCcw
 
 // Reusable Switch Component
 const Switch = ({ isOn, onToggle }) => (
-  <button 
-    onClick={onToggle}
-    className={`w-11 h-6 rounded-full transition-colors flex items-center px-1 ${isOn ? 'bg-[#064E3B]' : 'bg-[#0F172A]/10'}`}
+  <div 
+    onClick={(e) => {
+      e.stopPropagation(); // Prevents the parent button from triggering
+      onToggle();
+    }}
+    className={`w-11 h-6 rounded-full transition-colors flex items-center px-1 cursor-pointer ${isOn ? 'bg-[#064E3B]' : 'bg-[#0F172A]/10'}`}
   >
     <motion.div animate={{ x: isOn ? 20 : 0 }} className="w-4 h-4 bg-white rounded-full shadow-sm" />
-  </button>
+  </div>
 );
 
 const SettingItem = ({ icon: Icon, label, action, isDestructive, onClick }) => (
@@ -36,7 +39,7 @@ const SettingGroup = ({ title, children }) => (
   </div>
 );
 
-export const Settings = () => {
+const Settings = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   return (
@@ -66,3 +69,4 @@ export const Settings = () => {
     </motion.div>
   );
 };
+export default Settings;
