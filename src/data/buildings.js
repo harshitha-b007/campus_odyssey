@@ -1,0 +1,17 @@
+export const BUILDINGS = [
+  { id: 'rv', name: 'RV Block', category: 'Academic', description: 'Main Academic Block' },
+  { id: 'ks', name: 'KS Block', category: 'Academic', description: 'Academic Block' },
+  { id: 'mech', name: 'Mechanical Block', category: 'Academic', description: 'Mechanical Department' },
+  { id: 'workshop', name: 'Mechanical Workshop', category: 'Lab', description: 'Practical Workshop' },
+  { id: 'labs', name: 'Mechanical Labs', category: 'Lab', description: 'Mechanical Laboratories' },
+  { id: 'cafeteria', name: 'Cafeteria / Dining', category: 'Services', description: 'Dining Area' },
+  { id: 'hostel', name: 'Girls Hostel Mess', category: 'Services', description: 'Hostel Dining' },
+  { id: 'temple', name: 'Temple', category: 'Amenity', description: 'Campus Temple' },
+  { id: 'gen', name: 'Generator Room', category: 'Utility', description: 'Power Utility' },
+  { id: 'js_hall', name: 'JS Conference Hall', category: 'Venue', description: 'CSE Venue' },
+  { id: 'ramanujan', name: 'Srinivasa Ramanujan Hall', category: 'Venue', description: 'AI & DS Venue' },
+  { id: 'civil_hall', name: 'Civil Seminar Hall', category: 'Venue', description: 'IT & AIML Venue' },
+  { id: 'ece_hall', name: 'ECE Seminar Hall', category: 'Venue', description: 'CIVIL, ICE & EEE Venue' },
+  { id: 'mba_hall', name: 'MBA Seminar Hall', category: 'Venue', description: 'ECE/MBA Venue' },
+  { id: 'reg_venue', name: 'Registration & Inaugural Venue', category: 'Event', description: 'Primary Induction Venue' },
+];
