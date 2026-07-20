@@ -2,9 +2,20 @@ import { motion } from 'framer-motion';
 import { Button } from '../components/ui/Button';
 import { GlassCard } from '../components/ui/GlassCard';
 import { Input } from '../components/ui/Input';
-import { Compass, BadgeCheck, Lock, ArrowRight, MapPin } from 'lucide-react';
+import { Compass, BadgeCheck, Lock, MapPin } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const [regNumber, setRegNumber] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    // Mock login: navigate to dashboard
+    navigate('/dashboard');
+  };
+
   return (
     <div className="min-h-screen w-full relative overflow-hidden flex items-center justify-center p-4 font-sans">
       {/* 1. Cinematic Background */}
@@ -39,10 +50,8 @@ export const Login = () => {
         transition={{ delay: 1, duration: 1.2, ease: "circOut" }}
         className="w-full max-w-[340px] z-10"
       >
-        <GlassCard 
-            className="p-6 bg-[#F8F4E8]/60 backdrop-blur-md border border-[#D4A84B]/30 rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.4)] relative overflow-hidden"
-        >
-          {/* Enhanced Compass */}
+        <GlassCard className="p-6 bg-[#F8F4E8]/60 backdrop-blur-md border border-[#D4A84B]/30 rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.4)] relative overflow-hidden">
+          
           <div className="absolute -top-4 -right-4 w-20 h-20 flex items-center justify-center">
             <div className="absolute w-12 h-12 bg-[#D4A84B]/20 blur-xl rounded-full" />
             <motion.div 
@@ -61,11 +70,14 @@ export const Login = () => {
             </p>
           </header>
 
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+          {/* Form wrapper */}
+          <div className="space-y-4">
             <div className="relative">
               <BadgeCheck className="absolute left-3 top-3.5 w-4 h-4 text-[#1E4D3A]" />
               <Input 
                 placeholder="Registration Number" 
+                value={regNumber}
+                onChange={(e) => setRegNumber(e.target.value)}
                 className="bg-[#F8F4E8]/50 border-[#1E4D3A]/20 placeholder:text-[#3A4A42]/60 rounded-[12px] py-4 pl-10 text-sm transition-all"
               />
             </div>
@@ -75,6 +87,8 @@ export const Login = () => {
               <Input 
                 type="password"
                 placeholder="Password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="bg-[#F8F4E8]/50 border-[#1E4D3A]/20 placeholder:text-[#3A4A42]/60 rounded-[12px] py-4 pl-10 text-sm transition-all"
               />
               <div className="text-right">
@@ -85,11 +99,13 @@ export const Login = () => {
             </div>
 
             <Button 
+              type="button" 
+              onClick={handleLogin}
               className="w-full py-5 bg-[#1E4D3A] hover:bg-[#16324F] hover:shadow-[0_0_20px_rgba(212,168,75,0.4)] text-[#F8F4E8] rounded-[12px] transition-all hover:scale-[1.02] font-medium text-sm"
             >
               Start Exploring →
             </Button>
-          </form>
+          </div>
 
           <div className="mt-6 flex items-center justify-center gap-2 text-[#8C6D2D] text-[10px] font-bold">
             <MapPin className="w-3 h-3" />

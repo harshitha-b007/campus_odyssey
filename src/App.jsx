@@ -32,7 +32,6 @@ export default function App() {
         <Route path="/campus-echo" element={<CampusEcho />} />
         <Route path="/time-machine" element={<TimeMachine />} />
         <Route path="/community" element={<Community />} />
-        
         </Routes>
         <NotificationPanel 
           isOpen={isNotifOpen} 
