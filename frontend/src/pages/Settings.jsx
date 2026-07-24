@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Bell, Shield, Moon, Accessibility, Sparkles, Languages, RotateCcw, ChevronRight } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 // Reusable Switch Component
 const Switch = ({ isOn, onToggle }) => (
   <div 
@@ -44,6 +44,7 @@ const SettingGroup = ({ title, children, darkMode }) => (
 );
 
 const Settings = () => {
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleTheme = () => {
@@ -62,7 +63,7 @@ const Settings = () => {
       </h1>
 
       <SettingGroup title="Account" darkMode={darkMode}>
-        <SettingItem icon={User} label="Profile" darkMode={darkMode} />
+        <SettingItem icon={User} label="Profile" darkMode={darkMode} onClick={() => navigate("/profile")} />
         <SettingItem icon={Bell} label="Notifications" darkMode={darkMode} />
         <SettingItem icon={Shield} label="Privacy" darkMode={darkMode} />
       </SettingGroup>

@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Compass, Bell, Calendar, Megaphone, Star, Trophy, Map, ArrowRight } from 'lucide-react';
+import {
+  MapPin,
+  Compass,
+  Bell,
+  Calendar,
+  Megaphone,
+  Star,
+  Trophy,
+  Map,
+  ArrowRight,
+  X
+} from "lucide-react";
 import { useNavigate, Link } from 'react-router-dom';
 import { useChat } from '../context/ChatContext';
 import { Sparkles } from 'lucide-react';
 import { NotificationPanel } from '../components/NotificationPanel';
 
-const TopNav = ({ onNotifClick }) => {
+const TopNav = ({ onPosterClick }) => {
+  
   const { openChat } = useChat();
   return (
     <nav className="sticky top-0 w-full z-50 bg-[#E0D3AF]/80 backdrop-blur-md border-b border-[#64513B]/10 p-4">
@@ -18,6 +30,12 @@ const TopNav = ({ onNotifClick }) => {
               {item.name}
             </Link>
           ))}
+         <button
+  onClick={onPosterClick}
+  className="text-[#64513B]/70 hover:text-[#64513B] font-semibold text-xs uppercase tracking-widest transition-colors"
+>
+  Poster
+</button>
           <button 
             onClick={openChat}
             className="text-[#64513B]/70 hover:text-[#64513B] font-semibold text-xs uppercase tracking-widest transition-colors"
@@ -31,6 +49,7 @@ const TopNav = ({ onNotifClick }) => {
 };
 
 const Dashboard = () => {
+  const [isPosterOpen, setIsPosterOpen] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const navigate = useNavigate();
   const [studentData, setStudentData] = useState({
@@ -49,11 +68,10 @@ useEffect(() => {
 }, [navigate]);
   const [todaySchedule] = useState([{ sub: "DBMS", fac: "Dr. Smith", time: "09:50 AM", room: "302", bldg: "CSE Block", walk: "5m" }]);
   const [aiInput, setAiInput] = useState("");
+const [aiResponse, setAiResponse] = useState("How can I assist your engineering journey today?");
   const [dateTime, setDateTime] = useState(new Date());
 const { openChat } = useChat();
 
-// 1. Add this state to handle the AI response
-const [aiResponse, setAiResponse] = useState("How can I assist your engineering journey today?");
 
 // 2. Add this helper function to handle the hardcoded logic
 const handleAiSubmit = () => {
@@ -70,29 +88,6 @@ const handleAiSubmit = () => {
 };
 
 // 3. Update the Quest AI section in your JSX
-<section className="col-span-12 md:col-span-5">
-  <ParchmentCard title="Quest AI">
-    {/* This shows the AI's response */}
-    <div className="text-sm text-[#6D5B47] mb-6 min-h-[60px] italic">
-      {aiResponse}
-    </div>
-    <div className="flex gap-3">
-      <input 
-        className="flex-1 bg-[#E0D3AF]/40 p-3 rounded-2xl text-sm border border-[#64513B]/20 focus:outline-none focus:ring-2 focus:ring-[#3B727C]/30" 
-        placeholder="Ask Quest AI..." 
-        value={aiInput} 
-        onChange={(e) => setAiInput(e.target.value)} 
-        onKeyPress={(e) => e.key === 'Enter' && handleAiSubmit()}
-      />
-      <button 
-        onClick={handleAiSubmit}
-        className="bg-[#3B727C] text-white px-6 rounded-2xl text-sm font-semibold hover:bg-[#2C5D66] transition-all"
-      >
-        Send
-      </button>
-    </div>
-  </ParchmentCard>
-</section>
   useEffect(() => {
     const timer = setInterval(() => setDateTime(new Date()), 60000);
     return () => clearInterval(timer);
@@ -101,7 +96,7 @@ const handleAiSubmit = () => {
   return (
     
     <div className="relative min-h-screen w-full overflow-hidden bg-[#E0D3AF]">
-  <TopNav />
+  <TopNav onPosterClick={() => setIsPosterOpen(true)} />
       {/* Map Details Overlay */}
       <div className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: "url('/explorer-map-details.svg')" }} />
 
@@ -229,7 +224,36 @@ const handleAiSubmit = () => {
 
 
           <div className="hidden md:block md:col-span-2" />
+<section className="col-span-12 md:col-span-5">
 
+<ParchmentCard title="Quest AI">
+
+<div className="text-sm text-[#6D5B47] mb-6 min-h-[60px] italic">
+  {aiResponse}
+</div>
+
+<div className="flex gap-3">
+
+<input
+className="flex-1 bg-[#E0D3AF]/40 p-3 rounded-2xl text-sm border border-[#64513B]/20"
+placeholder="Ask Quest AI..."
+value={aiInput}
+onChange={(e)=>setAiInput(e.target.value)}
+onKeyDown={(e)=>e.key==="Enter" && handleAiSubmit()}
+/>
+
+<button
+onClick={handleAiSubmit}
+className="bg-[#3B727C] text-white px-6 rounded-2xl"
+>
+Send
+</button>
+
+</div>
+
+</ParchmentCard>
+
+</section>
          {/* Bottom Navigation */}
           <section className="col-span-12 grid grid-cols-2 md:grid-cols-4 gap-6">
             <Link to="/timetable" className="no-underline">
@@ -239,7 +263,7 @@ const handleAiSubmit = () => {
                 </div>
               </ParchmentCard>
             </Link>
-
+            
             <button onClick={() => setIsNotifOpen(true)} className="text-left">
               <ParchmentCard>
                 <div className="flex flex-col items-center gap-3 text-[#64513B] font-semibold text-sm">
@@ -264,6 +288,40 @@ const handleAiSubmit = () => {
           </section>
         </div>
       </main>
+      {isPosterOpen && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    className="fixed inset-0 z-[999] bg-black/90 backdrop-blur-md flex items-center justify-center"
+  >
+
+    <motion.div
+      initial={{ scale: 0.9 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 0.3 }}
+      className="relative w-screen h-screen flex items-center justify-center"
+    >
+
+      {/* Close Button */}
+      <button
+        onClick={() => setIsPosterOpen(false)}
+        className="absolute top-8 right-8 z-50 bg-white/90 rounded-full p-3 shadow-xl hover:bg-red-100"
+      >
+        <X size={26}/>
+      </button>
+
+
+      {/* Full Screen Poster */}
+      <img
+        src="/poster.png"
+        alt="Campus Odyssey Poster"
+        className="max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl"
+      />
+
+    </motion.div>
+
+  </motion.div>
+)}
     </div>
   );
 };

@@ -23,7 +23,15 @@ export default function App() {
 
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route 
+  path="/dashboard" 
+  element={
+    <Dashboard 
+      isNotifOpen={isNotifOpen}
+      setIsNotifOpen={setIsNotifOpen}
+    />
+  } 
+/>
           <Route path="/map" element={<CampusMap />} />
           <Route path="/timetable" element={<Timetable />} /> 
           <Route path="/attendance" element={<Attendance />} /> 
