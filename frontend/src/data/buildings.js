@@ -9,12 +9,12 @@ import {
   Landmark,
 } from "lucide-react";
 
-
 export const BUILDINGS = [
   {
     id: "rv",
     name: "RV Block",
     category: "Academic",
+    route:"rv-jsc-sr.svg",
     description: "Main Academic Block",
     icon: BookOpen,
     top: "25%",
@@ -30,6 +30,7 @@ export const BUILDINGS = [
     id: "ks",
     name: "KS Block",
     category: "Academic",
+    route:"ks.svg",
     description: "Academic Block",
     icon: BookOpen,
     top: "35%",
@@ -45,6 +46,7 @@ export const BUILDINGS = [
     id: "mech",
     name: "Mechanical Block",
     category: "Academic",
+    route:"mech.svg",
     description: "Mechanical Department",
     icon: BookOpen,
     top: "55%",
@@ -60,6 +62,7 @@ export const BUILDINGS = [
     id: "workshop",
     name: "Mechanical Workshop",
     category: "Lab",
+    route:"mech.svg",
     description: "Practical Workshop",
     icon: FlaskConical,
     top: "63%",
@@ -75,6 +78,7 @@ export const BUILDINGS = [
     id: "labs",
     name: "Mechanical Labs",
     category: "Lab",
+    route:"mech-lab.svg",
     description: "Mechanical Laboratories",
     icon: FlaskConical,
     top: "60%",
@@ -89,6 +93,7 @@ export const BUILDINGS = [
   {
     id: "cafeteria",
     name: "Cafeteria / Dining",
+    route: "canteen.svg",
     category: "Services",
     description: "Dining Area",
     icon: Coffee,
@@ -104,6 +109,7 @@ export const BUILDINGS = [
   {
     id: "hostel",
     name: "Girls Hostel Mess",
+    route: "girls-hostel-mess.svg",
     category: "Services",
     description: "Hostel Dining",
     icon: Utensils,
@@ -119,6 +125,7 @@ export const BUILDINGS = [
   {
     id: "temple",
     name: "Temple",
+    route: "temple.svg",
     category: "Amenity",
     description: "Campus Temple",
     icon: Landmark,
@@ -134,6 +141,7 @@ export const BUILDINGS = [
   {
     id: "gen",
     name: "Generator Room",
+    route: "mech.svg",
     category: "Utility",
     description: "Power Utility",
     icon: Zap,
@@ -149,6 +157,7 @@ export const BUILDINGS = [
   {
     id: "js_hall",
     name: "JS Conference Hall",
+    route:"rv-jsc-sr.svg",
     category: "Venue",
     description: "CSE Venue",
     icon: Presentation,
@@ -164,6 +173,7 @@ export const BUILDINGS = [
   {
     id: "ramanujan",
     name: "Srinivasa Ramanujan Hall",
+    route:"rv-jsc-sr.svg",
     category: "Venue",
     description: "AI & DS Venue",
     icon: Presentation,
@@ -179,6 +189,7 @@ export const BUILDINGS = [
   {
     id: "civil_hall",
     name: "Civil Seminar Hall",
+    route:"js.svg",
     category: "Venue",
     description: "IT & AIML Venue",
     icon: Presentation,
@@ -194,6 +205,7 @@ export const BUILDINGS = [
   {
     id: "ece_hall",
     name: "ECE Seminar Hall",
+    route:"ks.svg",
     category: "Venue",
     description: "CIVIL, ICE & EEE Venue",
     icon: Presentation,
@@ -209,6 +221,7 @@ export const BUILDINGS = [
   {
     id: "mba_hall",
     name: "MBA Seminar Hall",
+    route:"js.svg",
     category: "Venue",
     description: "ECE/MBA Venue",
     icon: Presentation,
@@ -224,6 +237,7 @@ export const BUILDINGS = [
   {
     id: "reg_venue",
     name: "Registration & Inaugural Venue",
+    route:"inaugral.svg",
     category: "Event",
     description: "Primary Induction Venue",
     icon: Info,

@@ -251,7 +251,7 @@ const handleAiSubmit = () => {
             {/* Updated to include navigation */}
 {[
   { name: 'Events', icon: Star, path: '/community' }, 
-  { name: 'Progress', icon: Trophy, path: '/progress' }
+  { name: 'Progress', icon: Trophy, path: '/campus-echo' }
 ].map(({ name, icon: Icon, path }) => (
   <button key={name} onClick={() => navigate(path)} className="text-left w-full">
     <ParchmentCard>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { StudentProvider } from './context/StudentContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -20,7 +20,7 @@ export default function App() {
   return (
     <StudentProvider>
       <ChatProvider>
-      <Router>
+
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -37,7 +37,6 @@ export default function App() {
           isOpen={isNotifOpen} 
           onClose={() => setIsNotifOpen(false)} 
         />
-      </Router>
       <QuestChat />
       
       </ChatProvider>

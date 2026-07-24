@@ -1,0 +1,36 @@
+<svg width="1672" height="941" viewBox="0 0 1672 941" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="8" result="blur"/>
+        <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+</defs>
+
+
+<!-- CYAN GLOW PATH -->
+<path 
+d="M811 818.5L783 881L1286.5 892C1316 883.5 1371.1 861.7 1355.5 842.5C1339.9 823.3 1242.67 739.833 1196 700.5C1182.5 687.5 1148.6 665.4 1121 681C1093.4 696.6 1031.83 700.5 1004.5 700.5C825.833 695.5 459.5 688.5 423.5 700.5C432.3 698.823 358.5 735.468 320.5 754L264.5 818.5C244.5 818.5 203.6 818.5 200 818.5C196.4 818.5 241.5 705.167 264.5 648.5" 
+stroke="#06B6D4"
+stroke-width="16"
+stroke-linecap="round"
+stroke-linejoin="round"
+opacity="0.8"
+filter="url(#cyanGlow)"
+/>
+
+
+<!-- MAIN CYAN PATH -->
+<path 
+d="M811 818.5L783 881L1286.5 892C1316 883.5 1371.1 861.7 1355.5 842.5C1339.9 823.3 1242.67 739.833 1196 700.5C1182.5 687.5 1148.6 665.4 1121 681C1093.4 696.6 1031.83 700.5 1004.5 700.5C825.833 695.5 459.5 688.5 423.5 700.5C432.3 698.823 358.5 735.468 320.5 754L264.5 818.5C244.5 818.5 203.6 818.5 200 818.5C196.4 818.5 241.5 705.167 264.5 648.5" 
+stroke="#22D3EE"
+stroke-width="8"
+stroke-linecap="round"
+stroke-linejoin="round"
+/>
+
+
+</svg>

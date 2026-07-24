@@ -4,6 +4,7 @@ import { Search, Zap, ZoomIn, ZoomOut, RefreshCw, BookOpen, FlaskConical, Coffee
 import { BUILDINGS } from "../data/buildings";
 
 const CampusMap = () => {
+  console.log("***** NEW CAMPUS MAP *****");
   const buildings = BUILDINGS;
   const [selectedBuilding, setSelectedBuilding] = useState(null);
   const [zoom, setZoom] = useState(1);
@@ -19,7 +20,8 @@ const CampusMap = () => {
       setZoom(1.2);
     }
   }, [searchQuery, buildings]);
-
+console.log("isNavigating:", isNavigating);
+console.log("selectedBuilding:", selectedBuilding);
   return (
     <div className="flex h-screen w-full bg-[#E0D3AF] p-4 gap-4 overflow-hidden font-sans">
       <aside className="w-80 flex flex-col gap-4 z-20">
@@ -95,7 +97,12 @@ const CampusMap = () => {
           <img src="/campus-map.webp" className="h-full w-full object-contain" alt="Map" />
           <div className="absolute inset-0 pointer-events-none">
             <YouAreHereMarker top="82%" left="50%" />
-            {isNavigating && selectedBuilding && <RouteWithDot path={selectedBuilding.path} />}
+
+{isNavigating && selectedBuilding && (
+  <RouteWithDot
+    route={`/routes/${selectedBuilding.route}`}
+  />
+)}
             {buildings
   .filter(
     (b) =>
@@ -103,14 +110,14 @@ const CampusMap = () => {
       b.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
   .map((b) => (
-    <BuildingMarker
-      key={b.id}
-      {...b}
-      onClick={() => {
-        setSelectedBuilding(b);
-        setIsNavigating(false);
-      }}
-    />
+ <BuildingMarker
+  key={b.id}
+  {...b}
+  onClick={() => {
+    setSelectedBuilding(b);
+    setIsNavigating(false);
+  }}
+/>
 ))}
           </div>
         </motion.div>
@@ -126,28 +133,20 @@ const CampusMap = () => {
   );
 };
 
-const RouteWithDot = ({ path }) => (
-  <svg className="absolute inset-0 w-full h-full z-20 overflow-visible" viewBox="0 0 1000 1000" preserveAspectRatio="none">
-    <motion.path 
-      d={path} 
-      fill="transparent" 
-      stroke="#C9A86A" 
-      strokeWidth="15" 
-      initial={{ pathLength: 0 }} 
-      animate={{ pathLength: 1 }} 
-      transition={{ duration: 4, ease: "linear" }} 
-    />
-    <motion.circle 
-      r="12" 
-      fill="#3B727C" 
-      initial={{ offsetDistance: "0%" }} 
-      animate={{ offsetDistance: "100%" }} 
-      transition={{ duration: 4, repeat: Infinity, ease: "linear" }} 
-      style={{ offsetPath: `path("${path}")` }} 
-    />
-  </svg>
-);
 
+const RouteWithDot = ({ route }) => {
+  console.log("Route image:", route);
+
+  return (
+    <img
+      src={route}
+      alt="Route"
+      className="absolute inset-0 w-full h-full object-contain z-[999]"
+      onLoad={() => console.log("Loaded")}
+      onError={() => console.log("Not found")}
+    />
+  );
+};
 const YouAreHereMarker = ({ top, left }) => (
   <div className="absolute z-40" style={{ top, left, transform: 'translate(-50%, -50%)' }}>
     <motion.div animate={{ scale: [1, 2], opacity: [0.8, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute w-8 h-8 bg-blue-500 rounded-full -left-2 -top-2" />

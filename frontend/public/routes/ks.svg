@@ -1,0 +1,33 @@
+<svg width="1672" height="941" viewBox="0 0 1672 941" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+    <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="8" result="blur"/>
+        <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+</defs>
+
+<!-- Cyan Glow -->
+<path 
+d="M809 818.5L791.5 861.5L1291 879L1359.5 861.5L1338 832.5L1316.5 803.5L1230.5 717.5L1129.5 666L1099.5 573.5L1035 528L936 539L731.5 528L753 489.5"
+stroke="#06B6D4"
+stroke-width="14"
+stroke-linecap="round"
+stroke-linejoin="round"
+opacity="0.8"
+filter="url(#cyanGlow)"
+/>
+
+<!-- Main Cyan Route -->
+<path 
+d="M809 818.5L791.5 861.5L1291 879L1359.5 861.5L1338 832.5L1316.5 803.5L1230.5 717.5L1129.5 666L1099.5 573.5L1035 528L936 539L731.5 528L753 489.5"
+stroke="#22D3EE"
+stroke-width="5"
+stroke-linecap="round"
+stroke-linejoin="round"
+/>
+
+</svg>
